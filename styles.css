@@ -61,7 +61,7 @@ body, html {
     height: 100%;
 }
 
-#Home {background-color: red;}
-#News {background-color: green;}
-#Contact {background-color: blue;}
-#About {background-color: orange;}
+#Home {background-color: #0039a6;}
+#News {background-color: #318ce7;}
+#Contact {background-color: #507287;}
+#About {background-color: #6699cc;}
