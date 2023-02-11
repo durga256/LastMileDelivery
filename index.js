@@ -78,13 +78,14 @@ function openInfo(evt, tabName) {
 function generateDestinationInputs(){
     var form = document.getElementById("theDestinations");
     var val = document.getElementById("numOfDestinations").value;
+    form.innerHTML = "";
     for(let i = 0; i < val; i++){
         var newElement = document.create
         form.innerHTML+="<div class=\"row\">\n" +
             "            <div class=\"col-25\">\n" +
             "                <label for=\"numOfDestinations\">"+i+"th desination</label>\n" +
             "\n" +
-            "                <input class=\"form-control\" id=\"thDestination\" type=\"number\"  required>\n" +
+            "                <input class=\"form-control\" id=\"thDestination\" type=\"text\"  required>\n" +
             "                <div class=\"valid-feedback\">Valid.</div>\n" +
             "                <div class=\"invalid-feedback\">Please fill out this field.</div>\n" +
             "            </div>\n" +
