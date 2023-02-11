@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    </head>
-    <body> 
-        <button type="button">GenerateGrid</button>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="index.js"></script>
 
-	    <div class="grid">
-
-	    </div>
-        
+</head>
+<body>
 
 
-        <script src="index.js"></script>
-    </body>
+
+
+<button class="tablink" onclick="openPage('Home', this, 'red')">Home</button>
+<button class="tablink" onclick="openPage('News', this, 'green')" id="defaultOpen">News</button>
+<button class="tablink" onclick="openPage('Contact', this, 'blue')">Contact</button>
+<button class="tablink" onclick="openPage('About', this, 'orange')">About</button>
+
+<div id="Home" class="tabcontent">
+    <button type="button" onclick = "openPage('News', this, 'green'),clicked()">GenerateGrid</button>
+    <button type="button" >GenerateGrid</button>
+</div>
+
+<div id="News" class="tabcontent">
+    <div class="grid"/>
+</div>
+
+<div id="Contact" class="tabcontent">
+    <h3>Contact</h3>
+    <p>Get in touch, or swing by for a cup of coffee.</p>
+</div>
+
+<div id="About" class="tabcontent">
+    <h3>About</h3>
+    <p>Who we are and what we do.</p>
+</div>
+</body>
 </html>
-
-
-    
-    
-    
-    
-
