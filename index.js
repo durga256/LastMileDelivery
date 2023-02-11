@@ -42,7 +42,7 @@ $(document).ready(function () {
             });
           }
         
-        codeAddress()
+
         /* New Stuff */
         var width = 100 / gridRC + '%';
         var height = 100 / gridRC + 'vh';
