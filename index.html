@@ -4,6 +4,7 @@
 <head>
     <! This style sheet is taken from https://www.w3schools.com/howto/howto_js_tabs.asp>
     <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <title>Routing</title>
@@ -25,7 +26,7 @@
 
     <div class="tab">
         <button class="tablinks" onclick="openInfo(event, 'contactUs')">Contact Us</button>
-        <button class="tablinks" onclick="openInfo(event, 'grid')">Services</button>
+        <button class="tablinks" onclick="openInfo(event, 'grid')">Grid</button>
         <button class="tablinks" onclick="openInfo(event, 'bookService')">Book a Service</button>
 
         <button class="tablinks" style="color: cornflowerblue; font-family: sans-serif" onclick="openInfo(event, 'services')">Routing Web</button>
@@ -52,7 +53,7 @@
             <div class="col-25">
                 <label for="numOfDestinations">Total Number of destinations</label>
 
-                <input class="form-control" id="numOfDestinations" type="number" onchange="generateDestinationInputs()" required>
+                <input class="form-control" id="numOfDestinations" type="number"  required>
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
@@ -62,13 +63,14 @@
 
         <div class = "row">
             <div class="col-25">
-                <input class="form-control" id="in6" type="submit" onclick ="openInfo(event,'grid')"/>
+                <input class="form-control" id="in6" type="submit" onclick ="showGrid()"/>
             </div>
         </div>
     </form>
 
 </div>
-<div id="grid" class="grid tabcontent">
+
+<div id="grid" class="tabcontent">
     <h1>the services</h1>
 
 </div>
@@ -109,7 +111,7 @@
 
 
 <!--script src="scripts/groceries.js"></script-->
-<script src="index.js"></script>
+
 
 </body>
 

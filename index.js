@@ -1,9 +1,10 @@
 
-$(document).ready(function () {
-    $('button').on('click', function () {
+function showGrid() {
         //Logic goes here
-        var x = document.getElementById('grid');
-        x.innerHTML="";
+        openInfo(event,'grid');
+        alert("hi")
+        let x = document.getElementById('grid');
+        x.innerHTML="services";
         const p1 = [1,2,3,4,5,6,7,8,9,10];//this is our arr of arrs of driver nodes
 	    var gridRC = Math.ceil(Math.sqrt(p1.length));
         var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>'
@@ -50,8 +51,7 @@ $(document).ready(function () {
         var width = 100 / gridRC + '%';
         var height = 100 / gridRC + 'vh';
         $('.square').css({'width': width, 'height': height});
-    });
-});
+}
 
 
 
@@ -93,7 +93,7 @@ function generateDestinationInputs(){
     }
     form.innerHTML += "<div class = \"row\">\n" +
         "            <div class=\"col-25\">\n" +
-        "                <input class=\"form-control\" id=\"in6\" type=\"submit\" onclick =\"openInfo(event,'grid')\"/>\n" +
+        "                <input class=\"form-control\" id=\"in6\" type=\"submit\" onclick =\"showGrid()\"/>\n" +
         "            </div>\n" +
         "        </div>"
 }
