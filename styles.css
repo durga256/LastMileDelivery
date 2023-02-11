@@ -1,0 +1,29 @@
+html, body, div, iframe { margin:0; padding:0; }
+
+
+iframe.container{
+    width:88.5%;
+    height:88.5%;
+    position: relative;
+    top:0px;
+    left:20px;
+}
+div.caption{
+    position: relative; 
+    bottom: 0; 
+    width: 100%; 
+    text-align: center;
+}
+div.square {
+	background-color: white;
+	border: 1px solid black;
+    padding: 5px;
+    
+	
+    /* New Stuff */
+	width: 6.25%;
+	height: 6.25vh;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+}
