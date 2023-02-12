@@ -1,4 +1,3 @@
-
 class Tsp {
     constructor() {
         this.pointDist = [];
@@ -269,11 +268,11 @@ function clicked() {
             tempSplitTSP = new SplitTSP();
             routeWt = tempSplitTSP.findPathWeight(shortestPath, arr_route_node_wts[i]);
             console.log('Route Weight main: ', routeWt);
-            arr_route_wt.push(routeWt)
+            arr_route_wt.push(routeWt);
             if (routeWt > truckLimit){
-                
+                tempSplitTSP.deleteHeaviestEdge();
             }else{
-
+                break;
             }
         }
         
