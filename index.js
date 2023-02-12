@@ -14,13 +14,17 @@ class Tsp {
     }
 
     getShortestRoute(points) {
+        console.log('This is where i need my: ',points);
         // Sets the this.pointDist array to the passed in value and the total number
         // of points / collection point this.pointDist = points;
 
         /* Run the create points if you are calculating as the crow flies distance
         from long/lat to generate the required 2d array of distances */
         this.pointLocations = points;
+        console.log('point locations',this.pointLocations);
         this.createpoints(points);
+        console.log("THia is the error", this.pointDist);
+        console.log("ha");
         this.totalpoints = this.pointDist[0].length;
 
         this.initialSetup();
@@ -442,13 +446,13 @@ function generateInputForDestinations(){
 
 }
 
-var global_coordiantes = []
-var global_weights = []
+var global_coordiantes = [];
+var global_weights = [];
 
 async function collect()
 {
     console.log('submit is called');
-    for(let i = 0; i < numOfAddresses; i++){
+    for(let i = 1; i <= numOfAddresses; i++){
         var temp = i+"frame";
         myArr.push(document.getElementById(temp).value);
     }
