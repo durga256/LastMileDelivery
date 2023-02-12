@@ -238,58 +238,73 @@ class SplitTSP{
     }
     findPathWeight(shortestPath, arr_wts){
         let totalWeight = 0;
-        console.log('Shortest Path: ', shortestPath);
-        console.log('Array weights: ', arr_wts);
         for (let i = 0; i < shortestPath.length; i += 1){
             totalWeight += arr_wts[shortestPath[i]];
-            console.log('wt, totalWt', arr_wts[shortestPath[i]], totalWeight);
         }
-        console.log('Total weight',totalWeight);
         return totalWeight;
     }
 }
+
+//variable to store the addresses
 var myArr = [];
+//variable to store the weights
+var myWeights = [];
+//keep track of num of addresses
 var numOfAddresses = 0;
 
 function clicked() {
         console.log('CLicked');
         var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
         var arr_wts = [6, -3, 5, 9,  9];
+        var arr_routes = [];
+        var arr_route_wt = [];
+        var arr_route_node_wts = [];
+        arr_route_node_wts.push(arr_wts);
+        arr_routes.push(arr_coordinates);
         var truckLimit = 10;
+        var temp;
+        var shortestPath;
+        var tempSplitTSP;
+        var routeWt;
         
-        let temp = new Tsp();
-        let shortestPath = temp.getShortestRoute(arr_coordinates);//this is our arr of arrs of driver nodes
-        console.log('Shortest Path main: ', shortestPath);
-        let tempSplitTSP = new SplitTSP();
-        let routeWt = tempSplitTSP.findPathWeight(shortestPath, arr_wts);
-        console.log('Route Weight main: ', routeWt);
+        for(let i = 0; i < arr_routes.length; i+= 1){
+            temp = new Tsp();
+            shortestPath = temp.getShortestRoute(arr_routes[i]);//this is our arr of arrs of driver nodes
+            console.log('Shortest Path main: ', shortestPath);
+            tempSplitTSP = new SplitTSP();
+            routeWt = tempSplitTSP.findPathWeight(shortestPath, arr_route_node_wts[i]);
+            console.log('Route Weight main: ', routeWt);
+            arr_route_wt.push(routeWt);
+            if (routeWt > truckLimit){
+                tempSplitTSP.deleteHeaviestEdge();
+            }else{
+                break;
+            }
+        }
         
 	    var gridRC = Math.ceil(Math.sqrt(shortestPath.length));
 
-        var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>'
+        var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>';
         var caption = '<div class="caption">driver';
         var $grid = $('.grid');
         var mapCount = 0;
-        for (var i = 0; i < gridRC; i++) {
-            var row = '<div>';
-            for (var j = 0; j < gridRC; j++) {
-                if (mapCount < shortestPath.length){
-                    row += '<div class = "square">'+iframe+caption+(mapCount+1)+'</div>'+'</div>';
-                    mapCount += 1;
-                }else{
-                    row += '<div class = "square">'+'</div>';
-                }
-            }
-
-	        row += '</div>';
-
-	        $grid.append(row);
-
-        }
+        // for (var i = 0; i < gridRC; i++) {
+        //     var row = '<div>';
+        //     for (var j = 0; j < gridRC; j++) {
+        //         if (mapCount < shortestPath.length){
+        //             row += '<div class = "square">'+iframe+caption+(mapCount+1)+'</div>'+'</div>';
+        //             mapCount += 1;
+        //         }else{
+        //             row += '<div class = "square">'+'</div>';
+        //         }
+        //     }
+	    //     row += '</div>';
+	    //     $grid.append(row);
+        // }
         /* New Stuff */
-        var width = 100 / gridRC + '%';
-        var height = 100 / gridRC + 'vh';
-        $('.square').css({'width': width, 'height': height});
+        //var width = 100 / gridRC + '%';
+        //var height = 100 / gridRC + 'vh';
+        //$('.square').css({'width': width, 'height': height});
 
 }
 document.getElementById("home-btn").addEventListener('click',  function(evt) {
@@ -345,14 +360,17 @@ function generateInputForDestinations(){
     var tempDiv = document.getElementById('destinations');
     tempDiv.innerHTML="";
     numOfAddresses = num;
-    for(let i = 0; i < num; i++){
+    for(let i = 1; i <= num; i++){
         var temp = i+"frame";
+        var temp1 = i+"weight";
         //alert(temp);
         tempDiv.innerHTML += "<div class=\"row\">\n" +
             "            <div class=\"col-25\">\n" +
-            "                <label for=\"frame\">"+i+" Destination:</label>\n" +
+            "                <label for=\"frame\"> Destination "+i+" :</label>\n" +
             "\n" +
             "                <input class=\"form-control\" id="+temp +" class = \"destinations\" type=\"text\" required>\n" +
+            "                <label for=\"frame\"> Weight "+i+":</label>\n" +
+            "                <input class=\"form-control\" id="+temp1 +" class = \"weights\" type=\"text\" required>\n" +
             "                <div class=\"valid-feedback\">Valid.</div>\n" +
             "                <div class=\"invalid-feedback\">Please fill out this field.</div>\n" +
             "            </div>\n" +
