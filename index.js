@@ -1,3 +1,4 @@
+
 class Tsp {
     constructor() {
         this.pointDist = [];
@@ -248,6 +249,9 @@ class SplitTSP{
         return totalWeight;
     }
 }
+var myArr = [];
+var numOfAddresses = 0;
+
 function clicked() {
         var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
         var arr_wts = [6, -3, 5, 9,  9];
@@ -261,6 +265,7 @@ function clicked() {
         console.log('Route Weight main: ', routeWt);
         
 	    var gridRC = Math.ceil(Math.sqrt(shortestPath.length));
+
         var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>'
         var caption = '<div class="caption">driver';
         var $grid = $('.grid');
@@ -279,51 +284,91 @@ function clicked() {
 	        row += '</div>';
 
 	        $grid.append(row);
-        }    
 
+        }
         /* New Stuff */
         var width = 100 / gridRC + '%';
         var height = 100 / gridRC + 'vh';
         $('.square').css({'width': width, 'height': height});
 
 }
-function openPage(pageName, elmnt, color) {
+document.getElementById("home-btn").addEventListener('click',  function(evt) {
+
+        return openPage("Home", evt)
+    }
+)
+
+document.getElementById("news-btn").addEventListener('click',  function(evt) {
+
+        return openPage("News", evt)
+    }
+)
+
+document.getElementById("contact-btn").addEventListener('click',  function(evt) {
+
+        return openPage("Contact", evt)
+    }
+)
+
+document.getElementById("about-btn").addEventListener('click',  function(evt) {
+
+        return openPage("About", evt)
+    }
+    )
+
+function openPage(pageName,evt) {
+
     // Hide all elements with class="tabcontent" by default */
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
+    //console.log(tabcontent)
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
 
     // Remove the background color of all tablinks/buttons
     tablinks = document.getElementsByClassName("tablink");
+    //console.log(tablinks)
     for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].style.backgroundColor = "";
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
     // Show the specific tab content
     document.getElementById(pageName).style.display = "block";
-
-    // Add the specific color to the button used to open the tab content
-    elmnt.style.backgroundColor = color;
+    evt.currentTarget.className += " active";
 }
 
 
 
 function generateInputForDestinations(){
     var num = document.getElementById('NumOfDestinations').value;
-    var tempDiv = documen.getElementById('destinations');
+    var tempDiv = document.getElementById('destinations');
     tempDiv.innerHTML="";
+    numOfAddresses = num;
     for(let i = 0; i < num; i++){
+        var temp = i+"frame";
+        //alert(temp);
         tempDiv.innerHTML += "<div class=\"row\">\n" +
             "            <div class=\"col-25\">\n" +
-            "                <label for=\"frame\">Destination:</label>\n" +
+            "                <label for=\"frame\">"+i+" Destination:</label>\n" +
             "\n" +
-            "                <input class=\"form-control\" id=\"frame\" type=\"text\" required>\n" +
+            "                <input class=\"form-control\" id="+temp +" class = \"destinations\" type=\"text\" required>\n" +
             "                <div class=\"valid-feedback\">Valid.</div>\n" +
             "                <div class=\"invalid-feedback\">Please fill out this field.</div>\n" +
             "            </div>\n" +
             "        </div>";
     }
+    tempDiv.innerHTML+="<button type=\"button\" onclick = \"collect(),clicked(),openPage('News',event)\">GenerateGrid</button>";
+
 }
+
+function collect(){
+    for(let i = 0; i < numOfAddresses; i++){
+        var temp = i+"frame";
+        myArr.push(document.getElementById(temp).value);
+    }
+
+}
+
+
 
