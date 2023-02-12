@@ -23,7 +23,7 @@
 
         <div class="row">
             <div class="col-25">
-                <label for="frame">Full Name</label>
+                <label for="frame">Ware House Address:</label>
 
                 <input class="form-control" id="frame" type="text" required>
                 <div class="valid-feedback">Valid.</div>
@@ -31,7 +31,21 @@
             </div>
         </div>
 
-    <button type="button" onclick = "openPage('News', this, 'green'),clicked()">GenerateGrid</button>
+        <div class="row">
+            <div class="col-25">
+                <label for="NumOfDestinations">Num of Destinations:</label>
+
+                <input class="form-control" id="NumOfDestinations" onChange = "generateInputForDestinations()" type="text" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+        </div>
+
+        <div id = "destinations"/>
+
+
+
+        <button type="button" onclick = "openPage('News', this, 'green'),clicked()">GenerateGrid</button>
     </form>
 </div>
 

@@ -310,4 +310,20 @@ function openPage(pageName, elmnt, color) {
 
 
 
+function generateInputForDestinations(){
+    var num = document.getElementById('NumOfDestinations').value;
+    var tempDiv = documen.getElementById('destinations');
+    tempDiv.innerHTML="";
+    for(let i = 0; i < num; i++){
+        tempDiv.innerHTML += "<div class=\"row\">\n" +
+            "            <div class=\"col-25\">\n" +
+            "                <label for=\"frame\">Destination:</label>\n" +
+            "\n" +
+            "                <input class=\"form-control\" id=\"frame\" type=\"text\" required>\n" +
+            "                <div class=\"valid-feedback\">Valid.</div>\n" +
+            "                <div class=\"invalid-feedback\">Please fill out this field.</div>\n" +
+            "            </div>\n" +
+            "        </div>";
+    }
+}
 
