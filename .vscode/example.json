@@ -1,0 +1,93 @@
+[
+    {
+        "address_components": [
+            {
+                "long_name": "Hurdman E",
+                "short_name": "Hurdman E",
+                "types": [
+                    "bus_station",
+                    "establishment",
+                    "point_of_interest",
+                    "transit_station"
+                ]
+            },
+            {
+                "long_name": "Industrial Park",
+                "short_name": "Industrial Park",
+                "types": [
+                    "neighborhood",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Ottawa",
+                "short_name": "Ottawa",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Ottawa",
+                "short_name": "Ottawa",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Ontario",
+                "short_name": "ON",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Canada",
+                "short_name": "CA",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "K1G 4J4",
+                "short_name": "K1G 4J4",
+                "types": [
+                    "postal_code"
+                ]
+            }
+        ],
+        "formatted_address": "Hurdman E, Ottawa, ON K1G 4J4, Canada",
+        "geometry": {
+            "location": {
+                "lat": 45.412042,
+                "lng": -75.66721199999999
+            },
+            "location_type": "GEOMETRIC_CENTER",
+            "viewport": {
+                "northeast": {
+                    "lat": 45.4133520802915,
+                    "lng": -75.66582716970849
+                },
+                "southwest": {
+                    "lat": 45.4106541197085,
+                    "lng": -75.66852513029151
+                }
+            }
+        },
+        "partial_match": true,
+        "place_id": "ChIJPfVut5sFzkwRa-3ZMbx5VoY",
+        "plus_code": {
+            "compound_code": "C86M+R4 Gloucester, Ottawa, ON, Canada",
+            "global_code": "87Q6C86M+R4"
+        },
+        "types": [
+            "bus_station",
+            "establishment",
+            "point_of_interest",
+            "transit_station"
+        ]
+    }
+]

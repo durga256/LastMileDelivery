@@ -94,7 +94,7 @@ class Tsp {
         // Return the total distance
         let tempOrder = order;
         tempOrder.push(order[0]);
-        console.log('Shortest Path: ', tempOrder, 'Totaldistance: ', totalDistance);
+        //console.log('Shortest Path: ', tempOrder, 'Totaldistance: ', totalDistance);
         return totalDistance;
     }
 
@@ -252,6 +252,7 @@ var myArr = [];
 var numOfAddresses = 0;
 
 function clicked() {
+        console.log('CLicked');
         var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
         var arr_wts = [6, -3, 5, 9,  9];
         var truckLimit = 10;
@@ -361,13 +362,38 @@ function generateInputForDestinations(){
 
 }
 
-function collect(){
+var global_coordiantes = []
+var global_weights = []
+
+async function collect()
+{
+    console.log('submit is called');
     for(let i = 0; i < numOfAddresses; i++){
         var temp = i+"frame";
         myArr.push(document.getElementById(temp).value);
     }
+    console.log(myArr)
+    for (let i = 0 ; i < myArr.length ; i+=1 ){
+    console.log('For is working');
+    var str = myArr[i];
+    var nospclchar = str.replace(/[^\w ]/g, '');
+    console.log(nospclchar+'this is the seperated string');
+    await fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+nospclchar+'&components=country:CA&key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8')
+    .then(response => 
+      response.json()
+    ).then(data=>{
+        console.log(data);
+        const lat = data.results[0].geometry.location.lat;
+        const long = data.results[0].geometry.location.lng;
+        global_coordiantes.push([lat, long]);
+      //  console.log(data);
+      //  console.log(lat, long);
 
+    })
+    .catch(error => {
+        console.log(error)
+    });
+    console.log(global_coordiantes)
+    }//for ends
 }
-
-
 
