@@ -96,7 +96,7 @@ class Tsp {
         // Return the total distance
         let tempOrder = order;
         tempOrder.push(order[0]);
-        console.log('Shortest Path: ', tempOrder, 'Totaldistance: ', totalDistance);
+        //console.log('Shortest Path: ', tempOrder, 'Totaldistance: ', totalDistance);
         return totalDistance;
     }
 
@@ -239,11 +239,20 @@ class SplitTSP{
 
     }
     findPathWeight(shortestPath, arr_wts){
+        console.log('Shortest path in finPathWeight: ',shortestPath,' Weights array: ', arr_wts);
         let totalWeight = 0;
         for (let i = 0; i < shortestPath.length; i += 1){
             totalWeight += arr_wts[shortestPath[i]];
         }
+        console.log('Weight by findPathWeight: ',totalWeight);
         return totalWeight;
+    }
+    delete2HeaviestEdges(routeToSplit){
+        console.log('Route to be split: ', routeToSplit, 'Split point: ',Math.floor(routeToSplit.length/2));
+        let splitIndex = Math.ceil(routeToSplit.length / 2);
+        global_splitRoute1 = routeToSplit.splice(0, splitIndex);
+        global_splitRoute2 = routeToSplit.splice(-splitIndex);
+        //console.log(global_splitRoute1, global_splitWtRoute1,global_splitRoute2, global_splitWtRoute2);
     }
 }
 
@@ -253,37 +262,55 @@ var myArr = [];
 var myWeights = [];
 //keep track of num of addresses
 var numOfAddresses = 0;
+var global_splitRoute1;
+var global_splitRoute2;
 
 function clicked() {
+        console.log('Clicked');
+        var truckLimit = 10; //hardcoded
         var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
-        var arr_wts = [6, -3, 5, 9,  9];
-        var arr_routes = [];
+        var arr_wts = [6, -2, 5, -1,  9];
+        var arr_routes = []; //stores the index of nodes in the shortest routes
         var arr_route_wt = [];
-        var arr_route_node_wts = [];
-        arr_route_node_wts.push(arr_wts);
-        arr_routes.push(arr_coordinates);
-        var truckLimit = 10;
         var temp;
         var shortestPath;
         var tempSplitTSP;
         var routeWt;
-        
-        for(let i = 0; i < arr_routes.length; i+= 1){
-            temp = new Tsp();
-            shortestPath = temp.getShortestRoute(arr_routes[i]);//this is our arr of arrs of driver nodes
-            console.log('Shortest Path main: ', shortestPath);
+        var routeToSplit;
+        var routeWt1;
+        var routeWt2;
+        //do first iteration here
+        temp = new Tsp();
+        shortestPath = temp.getShortestRoute(arr_coordinates);//this is our arr of arrs of driver nodes
+        arr_routes.push(shortestPath);
+        do{
             tempSplitTSP = new SplitTSP();
-            routeWt = tempSplitTSP.findPathWeight(shortestPath, arr_route_node_wts[i]);
-            console.log('Route Weight main: ', routeWt);
-            arr_route_wt.push(routeWt);
-            if (routeWt > truckLimit){
-                tempSplitTSP.deleteHeaviestEdge();
-            }else{
-                break;
+            routeWt = tempSplitTSP.findPathWeight(arr_routes[0], arr_wts);
+            if(arr_routes[0].length == arr_coordinates.length){
+                arr_route_wt.push(routeWt);
+            } 
+            console.log('Array route wt after pushing first',arr_route_wt)
+            if(arr_route_wt[0] > truckLimit){
+                arr_route_wt.shift();
+                console.log('Array route wt after shifting',arr_route_wt)
+                routeToSplit = arr_routes.shift(); //pop first element of arr, optimize it, push the result to the back
+                tempSplitTSP.delete2HeaviestEdges(routeToSplit);
+                arr_routes.push(global_splitRoute1);
+                arr_routes.push(global_splitRoute2);
+                routeWt1 = tempSplitTSP.findPathWeight(global_splitRoute1, arr_wts);
+                routeWt2 = tempSplitTSP.findPathWeight(global_splitRoute2, arr_wts);
+                arr_route_wt.push(routeWt1);
+                arr_route_wt.push(routeWt2);
+                console.log('Array_route_wt after end of if: ', arr_route_wt);
+                console.log("Route weights: ", arr_route_wt);
+                console.log("Route", arr_routes);
             }
-        }
+            
+        }while(arr_route_wt.length > 0 && arr_route_wt[0] > truckLimit);
+        console.log('Array of final routes', arr_routes);
+        console.log('Final Route wt of each route', arr_route_wt);
         
-	    var gridRC = Math.ceil(Math.sqrt(shortestPath.length));
+	    var gridRC = Math.ceil(Math.sqrt(arr_routes.length));
 
         var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>';
         var caption = '<div class="caption">driver';
@@ -377,16 +404,41 @@ function generateInputForDestinations(){
 
 }
 
-function collect(){
-    for(let i = 1; i <= numOfAddresses; i++){
+var global_coordiantes = []
+var global_weights = []
+
+async function collect()
+{
+    console.log('submit is called');
+    for(let i = 0; i < numOfAddresses; i++){
         var temp = i+"frame";
         myArr.push(document.getElementById(temp).value);
     }
-    for(let i = 1; i <= numOfAddresses; i++){
-        var temp = i+"weight";
-        myWeights.push(document.getElementById(temp).value);
-    }
+    console.log(myArr)
+    for (let i = 0 ; i < myArr.length ; i+=1 ){
+    console.log('For is working');
+    var str = myArr[i];
+    var nospclchar = str.replace(/[^\w ]/g, '');
+    console.log(nospclchar+'this is the seperated string');
+    await fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+nospclchar+'&components=country:CA&key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8')
+    .then(response => 
+      response.json()
+    ).then(data=>{
+        console.log(data);
+        const lat = data.results[0].geometry.location.lat;
+        const long = data.results[0].geometry.location.lng;
+        global_coordiantes.push([lat, long]);
+      //  console.log(data);
+      //  console.log(lat, long);
+
+    })
+    .catch(error => {
+        console.log(error)
+    });
+    console.log(global_coordiantes)
+    }//for ends
 }
+
 
 let slideIndex = 1;
 showSlides(slideIndex);
