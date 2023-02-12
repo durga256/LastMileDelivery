@@ -253,7 +253,12 @@ class SplitTSP{
         //console.log(global_splitRoute1, global_splitWtRoute1,global_splitRoute2, global_splitWtRoute2);
     }
 }
+
+//variable to store the addresses
 var myArr = [];
+//variable to store the weights
+var myWeights = [];
+//keep track of num of addresses
 var numOfAddresses = 0;
 var global_splitRoute1;
 var global_splitRoute2;
@@ -305,30 +310,27 @@ function clicked() {
         
 	    var gridRC = Math.ceil(Math.sqrt(arr_routes.length));
 
-        var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8&origin='+''+'&destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>'
+        var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>';
         var caption = '<div class="caption">driver';
         var $grid = $('.grid');
         var mapCount = 0;
-        for (var i = 0; i < gridRC; i++) {
-            var row = '<div>';
-            for (var j = 0; j < gridRC; j++) {
-                if (mapCount < shortestPath.length){
-                    row += '<div class = "square">'+iframe+caption+(mapCount+1)+'</div>'+'</div>';
-                    mapCount += 1;
-                }else{
-                    row += '<div class = "square">'+'</div>';
-                }
-            }
-
-	        row += '</div>';
-
-	        $grid.append(row);
-
-        }
+        // for (var i = 0; i < gridRC; i++) {
+        //     var row = '<div>';
+        //     for (var j = 0; j < gridRC; j++) {
+        //         if (mapCount < shortestPath.length){
+        //             row += '<div class = "square">'+iframe+caption+(mapCount+1)+'</div>'+'</div>';
+        //             mapCount += 1;
+        //         }else{
+        //             row += '<div class = "square">'+'</div>';
+        //         }
+        //     }
+	    //     row += '</div>';
+	    //     $grid.append(row);
+        // }
         /* New Stuff */
-        var width = 100 / gridRC + '%';
-        var height = 100 / gridRC + 'vh';
-        $('.square').css({'width': width, 'height': height});
+        //var width = 100 / gridRC + '%';
+        //var height = 100 / gridRC + 'vh';
+        //$('.square').css({'width': width, 'height': height});
 
 }
 document.getElementById("home-btn").addEventListener('click',  function(evt) {
@@ -384,14 +386,17 @@ function generateInputForDestinations(){
     var tempDiv = document.getElementById('destinations');
     tempDiv.innerHTML="";
     numOfAddresses = num;
-    for(let i = 0; i < num; i++){
+    for(let i = 1; i <= num; i++){
         var temp = i+"frame";
+        var temp1 = i+"weight";
         //alert(temp);
         tempDiv.innerHTML += "<div class=\"row\">\n" +
             "            <div class=\"col-25\">\n" +
-            "                <label for=\"frame\">"+i+" Destination:</label>\n" +
+            "                <label for=\"frame\"> Destination "+i+" :</label>\n" +
             "\n" +
             "                <input class=\"form-control\" id="+temp +" class = \"destinations\" type=\"text\" required>\n" +
+            "                <label for=\"frame\"> Weight "+i+":</label>\n" +
+            "                <input class=\"form-control\" id="+temp1 +" class = \"weights\" type=\"text\" required>\n" +
             "                <div class=\"valid-feedback\">Valid.</div>\n" +
             "                <div class=\"invalid-feedback\">Please fill out this field.</div>\n" +
             "            </div>\n" +
@@ -402,11 +407,14 @@ function generateInputForDestinations(){
 }
 
 function collect(){
-    for(let i = 0; i < numOfAddresses; i++){
+    for(let i = 1; i <= numOfAddresses; i++){
         var temp = i+"frame";
         myArr.push(document.getElementById(temp).value);
     }
-
+    for(let i = 1; i <= numOfAddresses; i++){
+        var temp = i+"weight";
+        myWeights.push(document.getElementById(temp).value);
+    }
 }
 
 
