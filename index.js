@@ -365,6 +365,13 @@ function clicked() {
         //$('.square').css({'width': width, 'height': height});
 
 }
+
+document.getElementById("plan").addEventListener('click',  function(evt) {
+
+        return openPage("Home", evt)
+    }
+)
+
 document.getElementById("home-btn").addEventListener('click',  function(evt) {
 
         return openPage("Home", evt)

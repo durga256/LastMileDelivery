@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="673e0e07-22ae-4dbd-acb8-2e0b424e542a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LastMileDelivery.zip" beforeDir="false" afterPath="$PROJECT_DIR$/LastMileDelivery.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LastMileDelivery_Durga.zip.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +41,8 @@
       <updated>1676129849345</updated>
       <workItem from="1676129853163" duration="28564000" />
       <workItem from="1676184620268" duration="16634000" />
+      <workItem from="1676202910253" duration="167000" />
+      <workItem from="1676203147761" duration="563000" />
     </task>
     <servers />
   </component>
