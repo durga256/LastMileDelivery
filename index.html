@@ -11,13 +11,14 @@
 
         <link rel="stylesheet" href="styles.css">
     </head>
-<body>
+
+    <body onload="document.getElementById('homepagebutton').click();">
 <div class="nav-container w-container">
 
     <nav role="navigation" class="nav-menu w-nav-menu">
 
         <a data-w-id="26a834a9-196a-c35c-1055-52c655195738"  class="nav-link w-inline-block">
-            <div class="nav-link-text">Home</div>
+            <div class="nav-link-text" id="homepagebutton">Home</div>
 
             <div class="nav-link-underline" style="width: 0px;"></div>
         </a>
@@ -35,6 +36,11 @@
 
         <a id="discover" data-w-id="c358c3e7-418d-f411-4a76-8587c27a2fbf"  class="nav-link w-inline-block">
             <div class="nav-link-text">Contact us</div>
+            <div class="nav-link-underline" style="width: 0px;"></div>
+        </a>
+
+        <a id="maps" data-w-id="c358c3e7-418d-f411-4a76-8587c27a2fbf"  class="nav-link w-inline-block">
+            <div class="nav-link-text" id = "myMap">My Map</div>
             <div class="nav-link-underline" style="width: 0px;"></div>
         </a>
     </nav>
@@ -57,7 +63,29 @@
 </div>
 
     <div id="HomePage" class="tabcontent">
-
+        <div class="big_box">
+            <div class="blockLeft">
+                <div class="column-padding">
+                    <div class="tablet-centered">
+                        <div class="content-grid home-hero">
+                            <h1>Go from <span class="line-break-fixed">one to many</span></h1>
+                            <p class="section-sub-head">With Gumroad, anyone can earn their first dollar online. Just start with what you know, see what sticks, and get paid. It’s that easy.<br></p>
+                            <a id="w-node-_5d77b27f-90d6-b7ed-d123-1858df9fd32d-a1b3b6f8" data-w-id="5d77b27f-90d6-b7ed-d123-1858df9fd32d" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" href="https://app.gumroad.com/signup" class="shadow-button-wrap w-inline-block">
+                                <div class="shadow-button-text">Start Selling</div>
+                                <div style="transform: translate3d(0rem, 0rem, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="shadow-button-shadow _2"></div>
+                                <div style="transform: translate3d(0rem, 0rem, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="shadow-button-shadow"></div>
+                            </a></div>
+                    </div></div>
+            </div>
+            <div class="blockRight">
+                <div class="creator-description">Vegalia sells Procreate brushes</div>
+                <div data-w-id="93fce5f4-684a-d6b6-427b-65c3c0d0ec62" class="callout-wrap">
+                    <img src="https://assets-global.website-files.com/6171b265e5c8aa59b42c3472/61942b84ec3d406199f07d78_vegalia.png" loading="lazy" width="505" sizes="(max-width: 479px) 90vw, (max-width: 767px) 69vw, (max-width: 991px) 576px, (max-width: 1919px) 37vw, 576px" srcset="https://assets-global.website-files.com/6171b265e5c8aa59b42c3472/61942b84ec3d406199f07d78_vegalia-p-500.png 500w, https://assets-global.website-files.com/6171b265e5c8aa59b42c3472/61942b84ec3d406199f07d78_vegalia-p-800.png 800w, https://assets-global.website-files.com/6171b265e5c8aa59b42c3472/61942b84ec3d406199f07d78_vegalia.png 1010w" alt="" class="callout-image creator" style="will-change: transform; transform: translate3d(0px, -2.60256vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                    <img src="https://assets-global.website-files.com/6171b265e5c8aa59b42c3472/619f97a0f047aaa46093f3b3_paint-brush.svg" loading="lazy" alt="" class="sticker home-02" style="will-change: transform; transform: translate3d(0px, 2.60256vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><img src="https://assets-global.website-files.com/6171b265e5c8aa59b42c3472/6195275a9e5f4655891de886_gum-coins.svg" loading="lazy" alt="" class="sticker home-01" style="will-change: transform; transform: translate3d(0px, 2.60256vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><a href="https://byvegalia.gumroad.com/?recommended_by=search" target="_blank" class="name-tag w-inline-block">
+                    <div>Vegalia</div>
+                </a></div>
+            </div>
+        </div>
     </div>
 
     <div id="Home" class="tabcontent">
@@ -84,11 +112,11 @@
         </form>
     </div>
 
-    <div id="News" class="tabcontent">
-        <div class="grid"></div>
-    </div>
+<!--    <div id="map" class="tabcontent">-->
+<!--        -->
+<!--    </div>-->
 
-    <div id="Contact" class="tabcontent">
+    <div id="map" class="tabcontent">
         <!-- Slideshow container -->
         <div class="slideshow-container">
 
@@ -130,5 +158,6 @@
         <p>We are the delivery services who provide optimal solutions.</p>
     </div>
     <script src="index.js"></script>
+
 </body>
 </html>

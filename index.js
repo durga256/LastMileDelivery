@@ -254,6 +254,7 @@ class SplitTSP{
     }
 }
 
+
 //variable to store the addresses
 var myArr = [];
 //variable to store the weights
@@ -262,13 +263,11 @@ var myWeights = [];
 var numOfAddresses = 0;
 var global_splitRoute1;
 var global_splitRoute2;
-var global_final_route_coordinates;
-var global_final_iframes;
 
 function clicked() {
         console.log('Clicked');
         var truckLimit = 10; //hardcoded
-        var arr_coordinates = global_coordiantes;
+        var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
         var arr_wts = [6, -2, 5, -1,  9];
         var arr_routes = []; //stores the index of nodes in the shortest routes
         var arr_route_wt = [];
@@ -309,37 +308,13 @@ function clicked() {
         }while(arr_route_wt.length > 0 && arr_route_wt[0] > truckLimit);
         console.log('Array of final routes', arr_routes);
         console.log('Final Route wt of each route', arr_route_wt);
-        var arr_this_route;
-        for(let i = 0; i < arr_routes.length; i+=1){
-            arr_this_route = [];
-            for(let j = 0; j < arr_routes[i].length; j += 1){
-                arr_this_route.push(arr_coordinates[arr_routes[i][j]]);
-            }
-            console.log('Aarr of this route', arr_this_route)
-            global_final_route_coordinates.push(arr_this_route);
-        }
-        console.log('global final arr', global_final_route_coordinates);
-	    // var gridRC = Math.ceil(Math.sqrt(arr_routes.length));
-        global_final_iframes = [];
-        var iframestring;
-        for(let i =0; i < global_final_route_coordinates; i +=1){
-                iframestring ='<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin='
-                +global_final_route_coordinates[i][0][0]+','+global_final_route_coordinates[i][0][1]
-                +'&destination='+ global_final_route_coordinates[i][0][0] +','+global_final_route_coordinates[i][0][1]+'&waypoints=';
-                for (let j = 1; j < global_final_route_coordinates[i]; j+= 1){
-                    iframestring += global_final_route_coordinates[i][j][0] + ',' + global_final_route_coordinates[i][j][1];
-                    if(j!=global_final_route_coordinates[i]-1){
-                        iframestring += '|';
-                    }
-                }
-                iframestring += '&avoid=tolls|highways" allowfullscreen> </iframe></div>';
-                global_final_iframes.push(iframestring);
-        }
+        
+	    var gridRC = Math.ceil(Math.sqrt(arr_routes.length));
 
         var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>';
-        // var caption = '<div class="caption">driver';
-        // var $grid = $('.slideshow-container');
-        // var mapCount = 0;
+        var caption = '<div class="caption">driver';
+        var $grid = $('.slideshow-container');
+        var mapCount = 0;
         // for (var i = 0; i < gridRC; i++) {
         //     var row = '<div>';
         //     for (var j = 0; j < gridRC; j++) {
@@ -365,23 +340,23 @@ document.getElementById("home-btn").addEventListener('click',  function(evt) {
     }
 )
 
-document.getElementById("news-btn").addEventListener('click',  function(evt) {
+ document.getElementById("myMap").addEventListener('click',  function(evt) {
 
-        return openPage("News", evt)
+        return openPage("map", evt)
+     }
+ )
+
+document.getElementById("homepagebutton").addEventListener('click',  function(evt) {
+
+        return openPage("HomePage", evt)
     }
 )
 
-document.getElementById("contact-btn").addEventListener('click',  function(evt) {
-
-        return openPage("Contact", evt)
-    }
-)
-
-document.getElementById("about-btn").addEventListener('click',  function(evt) {
-
-        return openPage("About", evt)
-    }
-    )
+// document.getElementById("about-btn").addEventListener('click',  function(evt) {
+//
+//         return openPage("About", evt)
+//     }
+//     )
 
 function openPage(pageName,evt) {
 
@@ -402,6 +377,7 @@ function openPage(pageName,evt) {
 
     // Show the specific tab content
     document.getElementById(pageName).style.display = "block";
+
     evt.currentTarget.className += " active";
 }
 
