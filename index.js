@@ -1,4 +1,4 @@
-openPage('HomePage',event);
+
 
 class Tsp {
     constructor() {
@@ -414,7 +414,10 @@ async function collect()
         var temp = i+"frame";
         myArr.push(document.getElementById(temp).value);
     }
-    console.log(myArr)
+    for(let i = 1; i <= numOfAddresses; i++){
+        var temp = i+"weight";
+        myWeights.push(document.getElementById(temp).value);
+    }
     for (let i = 0 ; i < myArr.length ; i+=1 ){
     console.log('For is working');
     var str = myArr[i];
