@@ -239,13 +239,9 @@ class SplitTSP{
     }
     findPathWeight(shortestPath, arr_wts){
         let totalWeight = 0;
-        console.log('Shortest Path: ', shortestPath);
-        console.log('Array weights: ', arr_wts);
         for (let i = 0; i < shortestPath.length; i += 1){
             totalWeight += arr_wts[shortestPath[i]];
-            console.log('wt, totalWt', arr_wts[shortestPath[i]], totalWeight);
         }
-        console.log('Total weight',totalWeight);
         return totalWeight;
     }
 }
@@ -255,14 +251,31 @@ var numOfAddresses = 0;
 function clicked() {
         var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
         var arr_wts = [6, -3, 5, 9,  9];
+        var arr_routes = [];
+        var arr_route_wt = [];
+        var arr_route_node_wts = [];
+        arr_route_node_wts.push(arr_wts);
+        arr_routes.push(arr_coordinates);
         var truckLimit = 10;
+        var temp;
+        var shortestPath;
+        var tempSplitTSP;
+        var routeWt;
         
-        let temp = new Tsp();
-        let shortestPath = temp.getShortestRoute(arr_coordinates);//this is our arr of arrs of driver nodes
-        console.log('Shortest Path main: ', shortestPath);
-        let tempSplitTSP = new SplitTSP();
-        let routeWt = tempSplitTSP.findPathWeight(shortestPath, arr_wts);
-        console.log('Route Weight main: ', routeWt);
+        for(let i = 0; i < arr_routes.length; i+= 1){
+            temp = new Tsp();
+            shortestPath = temp.getShortestRoute(arr_routes[i]);//this is our arr of arrs of driver nodes
+            console.log('Shortest Path main: ', shortestPath);
+            tempSplitTSP = new SplitTSP();
+            routeWt = tempSplitTSP.findPathWeight(shortestPath, arr_route_node_wts[i]);
+            console.log('Route Weight main: ', routeWt);
+            arr_route_wt.push(routeWt)
+            if (routeWt > truckLimit){
+                
+            }else{
+
+            }
+        }
         
 	    var gridRC = Math.ceil(Math.sqrt(shortestPath.length));
 
