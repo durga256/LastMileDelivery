@@ -1,3 +1,5 @@
+openPage('HomePage',event);
+
 class Tsp {
     constructor() {
         this.pointDist = [];
@@ -285,7 +287,7 @@ function clicked() {
 
         var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>';
         var caption = '<div class="caption">driver';
-        var $grid = $('.grid');
+        var $grid = $('.slideshow-container');
         var mapCount = 0;
         // for (var i = 0; i < gridRC; i++) {
         //     var row = '<div>';
@@ -363,19 +365,15 @@ function generateInputForDestinations(){
         var temp = i+"frame";
         var temp1 = i+"weight";
         //alert(temp);
-        tempDiv.innerHTML += "<div class=\"row\">\n" +
-            "            <div class=\"col-25\">\n" +
+        tempDiv.innerHTML +=
             "                <label for=\"frame\"> Destination "+i+" :</label>\n" +
             "\n" +
             "                <input class=\"form-control\" id="+temp +" class = \"destinations\" type=\"text\" required>\n" +
             "                <label for=\"frame\"> Weight "+i+":</label>\n" +
-            "                <input class=\"form-control\" id="+temp1 +" class = \"weights\" type=\"text\" required>\n" +
-            "                <div class=\"valid-feedback\">Valid.</div>\n" +
-            "                <div class=\"invalid-feedback\">Please fill out this field.</div>\n" +
-            "            </div>\n" +
-            "        </div>";
+            "                <input class=\"form-control\" id="+temp1 +" class = \"weights\" type=\"text\" required>\n";
+
     }
-    tempDiv.innerHTML+="<button type=\"button\" onclick = \"collect(),clicked(),openPage('News',event)\">GenerateGrid</button>";
+    tempDiv.innerHTML+="<button type=\"button\" onclick = \"collect(),clicked(),openPage('News',event)\">Generate Grid</button>";
 
 }
 
@@ -388,6 +386,35 @@ function collect(){
         var temp = i+"weight";
         myWeights.push(document.getElementById(temp).value);
     }
+}
+
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
 }
 
 
