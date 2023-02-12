@@ -269,14 +269,14 @@ var myWeights = [];
 var numOfAddresses = 0;
 var global_splitRoute1;
 var global_splitRoute2;
-var global_final_route_coordinates;
-var global_final_iframes;
+var global_final_route_coordinates=[];
+var global_final_iframes=[];
 
 function clicked() {
         console.log('Clicked');
         var truckLimit = 10; //hardcoded
-        //var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
-        var arr_coordinates = global_coordiantes;
+        var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
+        //var arr_coordinates = global_coordiantes;
         var arr_wts = [6, -2, 5, -1,  9];
         var arr_routes = []; //stores the index of nodes in the shortest routes
         var arr_route_wt = [];
@@ -330,7 +330,7 @@ function clicked() {
         console.log('global final arr', global_final_route_coordinates);
         global_final_iframes = [];
         var iframestring;
-        for(let i =0; i < global_final_route_coordinates; i +=1){
+        for(let i =0; i < global_final_route_coordinates.length; i +=1){
                 iframestring ='<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin='
                 +global_final_route_coordinates[i][0][0]+','+global_final_route_coordinates[i][0][1]
                 +'&destination='+ global_final_route_coordinates[i][0][0] +','+global_final_route_coordinates[i][0][1]+'&waypoints=';
@@ -341,9 +341,10 @@ function clicked() {
                     }
                 }
                 iframestring += '&avoid=tolls|highways" allowfullscreen> </iframe></div>';
+                console.log(iframestring);
                 global_final_iframes.push(iframestring);
         }
-        console.log(global_final_iframes);
+        console.log("FINAL IFRAMES",global_final_iframes);
 	    // var gridRC = Math.ceil(Math.sqrt(arr_routes.length));
 
         // var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>';
