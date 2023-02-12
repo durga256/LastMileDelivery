@@ -1,4 +1,3 @@
-
 class Tsp {
     constructor() {
         this.pointDist = [];
