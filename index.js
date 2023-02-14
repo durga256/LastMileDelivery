@@ -20,8 +20,10 @@ class Tsp {
 
         /* Run the create points if you are calculating as the crow flies distance
         from long/lat to generate the required 2d array of distances */
+
         this.pointLocations = points;
-        console.log('point locations',this.pointLocations);
+
+        console.log('point locations',this.pointLocations.toString());
         this.createpoints(points);
         console.log("THia is the error", this.pointDist);
         console.log("ha");
@@ -66,6 +68,7 @@ class Tsp {
     the crow flies) and this distance between itself and every point in the order, inclusively. */
     createpoints() {
         for (let i = 0; i < this.pointLocations.length; i += 1) {
+
             this.pointDist[i] = [];
             for (let j = 0; j < this.pointLocations.length; j += 1) {
                 this.pointDist[i][j] = this.latDist(
@@ -275,8 +278,8 @@ var global_final_iframes=[];
 function clicked() {
         console.log('Clicked');
         var truckLimit = 10; //hardcoded
-        //var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
-        var arr_coordinates = global_coordiantes;
+        var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
+        //var arr_coordinates = global_coordiantes;
         var arr_wts = [6, -2, 5, -1,  9];
         var arr_routes = []; //stores the index of nodes in the shortest routes
         var arr_route_wt = [];
@@ -331,44 +334,32 @@ function clicked() {
         global_final_iframes = [];
         var iframestring;
         for(let i =0; i < global_final_route_coordinates.length; i +=1){
-                iframestring ='<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin='
+                iframestring ='<iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin='
                 +global_final_route_coordinates[i][0][0]+','+global_final_route_coordinates[i][0][1]
-                +'&destination='+ global_final_route_coordinates[i][0][0] +','+global_final_route_coordinates[i][0][1]+'&waypoints=';
-                for (let j = 1; j < global_final_route_coordinates[i]; j+= 1){
+                +'&destination='+ global_final_route_coordinates[i][0][0] +','+global_final_route_coordinates[i][0][1];
+                if(global_final_route_coordinates[i].length > 1){
+                    iframestring += '&waypoints=';
+                for (let j = 1; j < global_final_route_coordinates[i].length; j+= 1){
                     iframestring += global_final_route_coordinates[i][j][0] + ',' + global_final_route_coordinates[i][j][1];
-                    if(j!=global_final_route_coordinates[i]-1){
+                    if(j!=global_final_route_coordinates[i].length-1){
                         iframestring += '|';
                     }
-                }
-                iframestring += '&avoid=tolls|highways" allowfullscreen> </iframe></div>';
+                }}
+                iframestring += '&avoid=tolls|highways" allowfullscreen> </iframe>';
                 console.log(iframestring);
-                global_final_iframes.push(iframestring);
+                global_final_iframes.push('<div class = "square">'+iframestring+'</div>');
         }
+
         console.log("FINAL IFRAMES",global_final_iframes);
-	    // var gridRC = Math.ceil(Math.sqrt(arr_routes.length));
 
-        // var iframe = '<div class="h_iframe"><iframe class="container" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8 &origin=ChennaiAirport+India &destination=ChennaiCentral+India &waypoints=Nungambakkam+India|Kodambakkam+India &avoid=tolls|highways" allowfullscreen> </iframe></div>';
-        // var caption = '<div class="caption">driver';
-        // var $grid = $('.slideshow-container');
-        // var mapCount = 0;
-        // for (var i = 0; i < gridRC; i++) {
-        //     var row = '<div>';
-        //     for (var j = 0; j < gridRC; j++) {
-        //         if (mapCount < shortestPath.length){
-        //             row += '<div class = "square">'+iframe+caption+(mapCount+1)+'</div>'+'</div>';
-        //             mapCount += 1;
-        //         }else{
-        //             row += '<div class = "square">'+'</div>';
-        //         }
-        //     }
-	    //     row += '</div>';
-	    //     $grid.append(row);
-        // }
-        /* New Stuff */
-        //var width = 100 / gridRC + '%';
-        //var height = 100 / gridRC + 'vh';
-        //$('.square').css({'width': width, 'height': height});
-
+        var tempComp = document.getElementById("container");
+        for(let a = 0;a<global_final_iframes.length;a++){
+            tempComp.innerHTML+="<div class=\"mySlides\">\n" +
+                global_final_iframes[a] +
+                "            </div>";
+        }
+        tempComp.innerHTML+="<a class=\"prev\" onclick=\"plusSlides(-1)\">&#10094;</a>\n" +
+            "            <a class=\"next\" onclick=\"plusSlides(1)\">&#10095;</a>";
 }
 
 document.getElementById("plan").addEventListener('click',  function(evt) {
@@ -445,18 +436,19 @@ function generateInputForDestinations(){
     }
     tempDiv.innerHTML+="<button type=\"button\" onclick = \"callAll()\">Generate Grid</button>";
 
+
 }
 
 var global_coordiantes = [];
 var global_weights = [];
 
+
 async function callAll(){
     await collect();
     clicked();
-    openPage('News',event);
+    document.getElementById('myMap').click();
 }
-async function collect()
-{
+async function collect() {
     console.log('submit is called');
     for(let i = 1; i <= numOfAddresses; i++){
         var temp = i+"frame";
@@ -471,7 +463,7 @@ async function collect()
     var str = myArr[i];
     var nospclchar = str.replace(/[^\w ]/g, '');
     console.log(nospclchar+'this is the seperated string');
-    await fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+nospclchar+'&components=country:CA&key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8')
+    fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+nospclchar+'&components=country:CA&key=AIzaSyCYx3Pg-AjHgBYOwJ6LfXpBmuKGWwvH6k8')
     .then(response => 
       response.json()
     ).then(data=>{
@@ -491,7 +483,7 @@ async function collect()
 }
 
 
-let slideIndex = 1;
+let slideIndex = 0;
 showSlides(slideIndex);
 
 // Next/previous controls
@@ -517,7 +509,6 @@ function showSlides(n) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
     slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
 }
 
 
