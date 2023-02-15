@@ -278,8 +278,8 @@ var global_final_iframes=[];
 function clicked() {
         console.log('Clicked');
         var truckLimit = 10; //hardcoded
-        var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
-        //var arr_coordinates = global_coordiantes;
+        //var arr_coordinates = [[40.738967, -73.983748], [40.722868, -73.988469], [40.736853, -73.978427], [40.717598, -73.991130], [40.730934, -73.983019]];
+        var arr_coordinates = global_coordiantes;
         var arr_wts = [6, -2, 5, -1,  9];
         var arr_routes = []; //stores the index of nodes in the shortest routes
         var arr_route_wt = [];
