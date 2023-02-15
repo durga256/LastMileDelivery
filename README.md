@@ -18,7 +18,8 @@ Obviously option 2 is more optimised because it covers more nodes with the same 
 
 Looking at an example below<br>
 Given the points: 
-<table class="center">
+<p align="center">
+<table>
   <tr>
     <th>Address</th>
     <th>Weight to add to truck</th>
@@ -43,7 +44,7 @@ Given the points:
     <td>223 1st Ave, NY 10003</td>
     <td>9</td>
   </tr>
-</table>
+</table></p>
 
 The optimised routes given a truck can carry only 10 tonnes is given below:
 <br>
